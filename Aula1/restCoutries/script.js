@@ -45,5 +45,5 @@ async function exibirPais(nomeDoPais){
     console.log(tabelaHTML);
     divInfo.innerHTML = tabelaHTML; // Este comando "despeja" o HTML dentro do elemento divInfo. isso diz ao JavaScript: "O conteúdo HTML dentro da divInfo agora é igual ao texto que está na variável tabelaHTML.
     // Chama a função para iniciar a exibição do país
-    exibirPais("Brazil");
 }
+exibirPais("Brazil");
