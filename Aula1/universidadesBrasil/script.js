@@ -38,13 +38,19 @@ async function buscarUniversidades(nomeDoPais) {
 
 async function listarUniversidades(){
     const universidades = await buscarUniversidades("Brazil");
+    if (!universidades) {
+        console.log("Não foi possível carregar os dados.");
+        return; // Encerra a função se não houver dados
+    }
     const primeiras20 = universidades.slice(0, 20); // Pega as primeiras 20 universidades, o slice serve para isso.
     const listaFormatada = primeiras20.map( uni => ({
         nome: uni.name, site: uni.web_pages[0]
     })); /* Mapeia para um formato mais simples, 
     O método que usamos para transformar ou "mapear" 
     cada item de um array em algo novo é o .map(). */
-    console.table(listaFormatada); // Mostra em formato de tabela no console
+    const universidadesFederais = universidades.filter(uni => uni.name.includes("Federal"));
+    console.table(universidadesFederais); // Mostra em formato de tabela no console
+    console.table(listaFormatada); // Mostra em formato de tabela no console    
 }
 
 listarUniversidades(); // Aqui executa o relatorio
