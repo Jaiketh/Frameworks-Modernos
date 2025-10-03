@@ -1,20 +1,36 @@
 <template>
 <!-- elementos html da página -->
     <div class="container">
-        <h1>ToDo List</h1>
+        <h1>{{ titulo }}</h1> <!-- // interpolação de variável não reativa -->
+        <!-- v-bind: liga o script com o template sem interpolação -->
         <div class="input-row">
             <input
                 type="text"
                 placeholder="Digite uma tarefa e precione Enter"
+                v-model="newTask"
             /> 
-            <button>Adicionar</button>
+            <!-- v-bind: ou ":" liga o script com o template sem interpolação-->
+             <!-- v-on ou "@" liga o template com o script-->
+              <!-- v-model two way data bind. liga o template com o script e scritp com template-->
+            <button @click="addTask">Adicionar</button>
         </div>
-
+        <div>
+            <pre>{{ task }}</pre> <!-- interpolação de variável reativa -->
+        </div>
     </div>
 
 </template>
 <script setup>
 // javascript e funções do framework
+import { ref } from 'vue'; // implementa a reatividade, ou seja, quando o valor de uma variável muda, a interface é atualizada automaticamente
+const titulo = "Meu ToDo List"; // variável não reativa
+const task = ref([]); // variavel reativa
+const newTask = ref(""); // variavel reativa
+const addTask = () => {
+    console.log('Adicionando tarefa', newTask.value);
+    task.value.push(newTask.value);
+    newTask.value = "";
+}
 </script>
 <style>
 /* CSS */
